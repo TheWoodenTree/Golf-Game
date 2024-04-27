@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://ylrcphpj7h2b"]
+
+[ext_resource type="Theme" uid="uid://chvawionajfob" path="res://source/assets/themes/general_theme.tres" id="1_ng02h"]
+[ext_resource type="Script" path="res://source/actors/ui/menus/waiting_on_players_menu.gd" id="2_02yj8"]
+[ext_resource type="PackedScene" uid="uid://cumuyykeoa0u5" path="res://source/actors/ui/buttons/generic_button.tscn" id="3_51cn7"]
+[ext_resource type="PackedScene" uid="uid://drtv63juhdevm" path="res://source/actors/ui/buttons/close_button.tscn" id="3_ae4og"]
+
+[node name="WaitingForPlayersMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_ng02h")
+script = ExtResource("2_02yj8")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -116.0
+offset_right = 164.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 0
+text = "Connected Players:"
+
+[node name="PlayersContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+
+[node name="StartButton" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_51cn7")]
+layout_mode = 2
+text = "Start"
+
+[node name="CloseButton" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_ae4og")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 0
+text = "Cancel"
+variant = "Cancel"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

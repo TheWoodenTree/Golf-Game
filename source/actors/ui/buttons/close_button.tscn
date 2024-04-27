@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://drtv63juhdevm"]
+
+[ext_resource type="Script" path="res://source/actors/ui/buttons/close_button.gd" id="1_wnpvw"]
+
+[node name="CloseButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Close"
+script = ExtResource("1_wnpvw")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

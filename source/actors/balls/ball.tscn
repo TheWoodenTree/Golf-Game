@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=3 uid="uid://blb17vb5sdngl"]
+
+[ext_resource type="Script" path="res://source/actors/balls/ball.gd" id="1_5g0vq"]
+[ext_resource type="Script" path="res://source/actors/balls/camera_controller.gd" id="2_2a14x"]
+[ext_resource type="AudioStream" uid="uid://cmylk2tb46tpl" path="res://source/assets/sounds/swings/putt.ogg" id="3_rha8u"]
+[ext_resource type="AudioStream" uid="uid://8juemlcwf7d2" path="res://source/assets/sounds/explosions/explosion_with_beep_1.ogg" id="4_retpw"]
+[ext_resource type="PackedScene" uid="uid://cfkx47wctppfj" path="res://source/actors/particles/explosion.tscn" id="5_x1tli"]
+[ext_resource type="PackedScene" uid="uid://d2qnedfllcamh" path="res://source/actors/misc/power_arrow.tscn" id="6_2pv7k"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b7mwk"]
+friction = 0.15
+rough = true
+bounce = 0.35
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8pfrk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w04ts"]
+noise = SubResource("FastNoiseLite_8pfrk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xn6va"]
+albedo_texture = SubResource("NoiseTexture2D_w04ts")
+
+[sub_resource type="SphereMesh" id="SphereMesh_rhg6x"]
+material = SubResource("StandardMaterial3D_xn6va")
+radius = 0.021
+height = 0.043
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lfn04"]
+margin = 0.0
+radius = 0.021
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sgqjd"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_3giss"]
+length = 0.001
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ked0p"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:linear_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:angular_velocity")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("HitSoundPlayer:playing")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("ImpactSoundPlayer:playing")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("ExplosionLight:visible")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+
+[node name="Ball" type="RigidBody3D"]
+process_mode = 3
+collision_layer = 2
+collision_mask = 3
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_b7mwk")
+continuous_cd = true
+max_contacts_reported = 3
+contact_monitor = true
+linear_damp = 0.5
+angular_damp = 3.0
+script = ExtResource("1_5g0vq")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_rhg6x")
+
+[node name="WorldCollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lfn04")
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+top_level = true
+script = ExtResource("2_2a14x")
+trauma_noise = SubResource("FastNoiseLite_sgqjd")
+
+[node name="CameraSpring" type="SpringArm3D" parent="CameraController"]
+shape = SubResource("SeparationRayShape3D_3giss")
+
+[node name="Camera" type="Camera3D" parent="CameraController/CameraSpring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="HitSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_rha8u")
+volume_db = 17.297
+max_db = 6.0
+max_polyphony = 3
+
+[node name="ImpactSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+process_mode = 3
+stream = ExtResource("4_retpw")
+
+[node name="ExplosionLight" type="OmniLight3D" parent="."]
+visible = false
+light_color = Color(0.998113, 0.760677, 0.599068, 1)
+light_energy = 5.0
+omni_range = 3.0
+
+[node name="Explosion" parent="." instance=ExtResource("5_x1tli")]
+visible = false
+
+[node name="PowerArrow" parent="." instance=ExtResource("6_2pv7k")]
+top_level = true
+visible = false
+
+[node name="UsernameLabel" type="Label3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.2, 0)
+top_level = true
+billboard = 1
+text = "Name"
+font_size = 256
+outline_size = 32
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ked0p")

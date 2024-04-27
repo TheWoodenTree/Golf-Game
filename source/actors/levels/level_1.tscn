@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4hs00fle53t2"]
+
+[ext_resource type="Script" path="res://source/actors/levels/level.gd" id="1_f8eg1"]
+[ext_resource type="PackedScene" uid="uid://dyj6rh5e2sixr" path="res://source/actors/levels/holes/hole_1-1.tscn" id="1_l6hjp"]
+
+[node name="Level1" type="Node3D"]
+script = ExtResource("1_f8eg1")
+
+[node name="Hole1-1" parent="." instance=ExtResource("1_l6hjp")]
+
+[node name="Spawn0" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.1, 0)
+
+[node name="Spawn1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.1, 0)
+
+[node name="Spawn2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0.1, -1)
+
+[node name="Spawn3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0.1, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.284802, -0.509906, -0.811717, -0.0186146, -0.849567, 0.527152, -0.958406, -0.135024, -0.25145, -17.4796, 38.6258, -22.5505)
+shadow_enabled = true
+shadow_bias = 0.05

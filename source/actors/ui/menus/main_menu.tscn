@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://dabsfsyy5wr0h"]
+
+[ext_resource type="Theme" uid="uid://chvawionajfob" path="res://source/assets/themes/general_theme.tres" id="1_p2600"]
+[ext_resource type="PackedScene" uid="uid://cumuyykeoa0u5" path="res://source/actors/ui/buttons/generic_button.tscn" id="2_4vm6f"]
+[ext_resource type="Script" path="res://source/actors/ui/menus/main_menu.gd" id="2_p5wf8"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p2600")
+script = ExtResource("2_p5wf8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "Golf Game"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+
+[node name="NameEditor" type="TextEdit" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Enter Name"
+caret_blink = true
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="HostButton" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_4vm6f")]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Host"
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="JoinButton" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_4vm6f")]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Join"
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="StartButton" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_4vm6f")]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Start Game"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

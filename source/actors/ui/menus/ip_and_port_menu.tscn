@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnrj76x6pwsqv"]
+
+[ext_resource type="Theme" uid="uid://chvawionajfob" path="res://source/assets/themes/general_theme.tres" id="1_njhpe"]
+[ext_resource type="Script" path="res://source/actors/ui/menus/ip_and_port_menu.gd" id="2_ljicp"]
+[ext_resource type="PackedScene" uid="uid://drtv63juhdevm" path="res://source/actors/ui/buttons/close_button.tscn" id="3_evtok"]
+[ext_resource type="PackedScene" uid="uid://cumuyykeoa0u5" path="res://source/actors/ui/buttons/generic_button.tscn" id="3_fok8x"]
+
+[node name="IPAndPortMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_njhpe")
+script = ExtResource("2_ljicp")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -116.0
+offset_right = 164.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IPContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IPLabel" type="Label" parent="PanelContainer/VBoxContainer/IPContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "IP Address"
+
+[node name="IpField" type="LineEdit" parent="PanelContainer/VBoxContainer/IPContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PortContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 112
+
+[node name="PortLabel" type="Label" parent="PanelContainer/VBoxContainer/PortContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Port"
+
+[node name="PortField" type="LineEdit" parent="PanelContainer/VBoxContainer/PortContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+
+[node name="ConnectButton" parent="PanelContainer/VBoxContainer/ButtonContainer" instance=ExtResource("3_fok8x")]
+layout_mode = 2
+text = "Connect"
+
+[node name="CloseButton" parent="PanelContainer/VBoxContainer/ButtonContainer" instance=ExtResource("3_evtok")]
+layout_mode = 2
+text = "Cancel"
+variant = "Cancel"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ButtonContainer/ConnectButton" to="." method="_on_connect_button_pressed"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb8282vg4wve7"]
+
+[ext_resource type="Script" path="res://source/actors/general/main.gd" id="1_vj3f4"]
+[ext_resource type="Script" path="res://source/assets/scripts/menu_manager.gd" id="3_bvywh"]
+[ext_resource type="Script" path="res://source/actors/general/ui.gd" id="3_mdyqy"]
+
+[sub_resource type="Environment" id="Environment_s1m3q"]
+background_mode = 1
+background_color = Color(0.591586, 0.71637, 0.795124, 1)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_vj3f4")
+local_play = true
+enter_ip_and_port = false
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_mdyqy")
+
+[node name="swing_power_bar" type="ProgressBar" parent="UI"]
+visible = false
+custom_minimum_size = Vector2(1000, 100)
+layout_mode = 0
+offset_left = 43.0
+offset_top = 1299.0
+offset_right = 543.0
+offset_bottom = 1399.0
+theme_override_font_sizes/font_size = 32
+
+[node name="MenuManager" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_bvywh")
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s1m3q")

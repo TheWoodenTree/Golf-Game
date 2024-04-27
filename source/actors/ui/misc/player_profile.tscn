@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dq5o4ub4r1ekk"]
+
+[node name="PlayerProfile" type="Label"]
+offset_right = 40.0
+offset_bottom = 88.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
