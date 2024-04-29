@@ -12,7 +12,7 @@ var player_profile_res: Resource = preload("res://source/actors/ui/misc/player_p
 
 
 func get_swing_power():
-	return lerp(0.0, 1.75, pow(swing_power_bar.value / 100.0, 2))
+	return lerp(0.0, 1.0, swing_power_bar.value / 100.0)
 
 
 func _ready():
@@ -37,6 +37,5 @@ func remove_menu():
 
 @rpc("any_peer", "call_local")
 func remove_all_menus():
-	for menu in menu_manager.get_children():
-		menu_manager.remove_child(menu)
+	menu_manager.pop_all()
 	Global.lock_mouse()

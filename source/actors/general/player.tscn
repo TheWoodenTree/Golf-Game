@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7lwgvwlipdhf"]
+
+[ext_resource type="Script" path="res://source/actors/general/player.gd" id="1_m4045"]
+[ext_resource type="PackedScene" uid="uid://blb17vb5sdngl" path="res://source/actors/balls/ball.tscn" id="2_gs1pf"]
+[ext_resource type="PackedScene" uid="uid://8bj6q7q31ebd" path="res://source/actors/clubs/putter.tscn" id="3_2eohr"]
+[ext_resource type="Script" path="res://source/actors/balls/camera_controller.gd" id="3_rni4k"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gqopl"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_n4vuk"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_fkbkf"]
+resource_name = "swing"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PutterOrigin/Putter:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(0.261799, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7vq01"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PutterOrigin/Putter:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gww4x"]
+_data = {
+"RESET": SubResource("Animation_7vq01"),
+"swing": SubResource("Animation_fkbkf")
+}
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_m4045")
+
+[node name="Ball" parent="." instance=ExtResource("2_gs1pf")]
+
+[node name="PutterOrigin" type="Node3D" parent="."]
+
+[node name="Putter" parent="PutterOrigin" instance=ExtResource("3_2eohr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.311, 0.683, 0.044)
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+top_level = true
+script = ExtResource("3_rni4k")
+trauma_noise = SubResource("FastNoiseLite_gqopl")
+
+[node name="CameraSpring" type="SpringArm3D" parent="CameraController"]
+shape = SubResource("SeparationRayShape3D_n4vuk")
+spring_length = 0.5
+
+[node name="Camera" type="Camera3D" parent="CameraController/CameraSpring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gww4x")
+}

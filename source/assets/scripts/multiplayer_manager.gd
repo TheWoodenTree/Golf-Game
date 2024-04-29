@@ -5,7 +5,7 @@ var peer_username: String
 
 
 func _ready():
-	multiplayer.allow_object_decoding = true
+	#multiplayer.allow_object_decoding = true
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -32,7 +32,7 @@ func connection_failed():
 @rpc("any_peer")
 func send_player_information(id: int, username: String):
 	if Global.players.is_empty():
-		Global.add_player(Global.Player.new(id, username, null))
+		Global.add_player(Global.create_new_player(id, username))
 	else:
 		var has_player: bool = false
 		for player in Global.players:
@@ -41,7 +41,7 @@ func send_player_information(id: int, username: String):
 				break
 				
 		if not has_player:
-			Global.add_player(Global.Player.new(id, username, null))
+			Global.add_player(Global.create_new_player(id, username))
 	
 	if multiplayer.is_server():
 		for player in Global.players:

@@ -1,3 +1,10 @@
+MeshInstance3D
+Marker3D
+AnimationPlayer
+Node3D
+OmniLight3D
+Decal
+MultiplayerSynchronizer
 Label
 HBoxContainer
 HSeparator
@@ -5,10 +12,3 @@ MarginContainer
 Container
 VBoxContainer
 LineEdit
-Control
-TextEdit
-PanelContainer
-MultiplayerSynchronizer
-Label3D
-Marker3D
-Button

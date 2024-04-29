@@ -31,11 +31,14 @@ func _process(delta):
 
 
 func _input(event):
-	if event is InputEventMouseMotion and Global.mouse_locked and not Input.is_action_pressed("left_click"):
-		rotation.x += deg_to_rad(-event.relative.y * sens)
-		rotation.x = clamp(rotation.x, -PI/2, -PI/12)
-		
-		rotation.y += deg_to_rad(-event.relative.x * sens)
+	if event is InputEventMouseMotion and Global.mouse_locked:
+		if not Input.is_action_pressed("left_click"):
+			rotation.x += deg_to_rad(-event.relative.y * sens)
+			rotation.x = clamp(rotation.x, -PI/2, -PI/12)
+			rotation.y += deg_to_rad(-event.relative.x * sens)
+		else:
+			rotation.y += deg_to_rad(-event.relative.x * sens * 0.5)
+			
 		camera_spring.rotation.y = wrapf(camera_spring.rotation.y, 0.0, TAU)
 
 

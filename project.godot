@@ -55,3 +55,12 @@ left_click={
 
 3d/physics_engine="JoltPhysics3D"
 3d/default_gravity=9.81
+3d/time_before_sleep=0.25
+3d/solver/solver_iterations=64
+3d/solver/contact_recycle_radius=0.001
+3d/solver/contact_max_separation=0.005
+3d/solver/contact_max_allowed_penetration=0.001
+3d/solver/default_contact_bias=1.0
+jolt_3d/sleep/velocity_threshold=0.04
+jolt_3d/solver/contact_speculative_distance=0.001
+jolt_3d/solver/contact_allowed_penetration=0.001

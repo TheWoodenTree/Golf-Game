@@ -2,6 +2,7 @@ res://default_bus_layout.tres
 res://source/actors/general/main.tscn
 res://source/assets/materials/prototype/default/dark_prototype.tres
 res://source/assets/themes/general_theme.tres
+res://source/actors/balls/ball.gd
 res://source/actors/levels/level_1.tscn
 res://source/actors/levels/holes/hole_1-1.tscn
 res://source/actors/particles/explosion.tscn
@@ -9,8 +10,15 @@ res://source/actors/misc/power_arrow.tscn
 res://source/actors/ui/menus/main_menu.tscn
 res://source/actors/ui/buttons/generic_button.tscn
 res://source/actors/balls/ball.tscn
-res://source/actors/ui/menus/ip_and_port_menu.tscn
-res://source/actors/ui/buttons/close_button.tscn
-res://source/actors/ui/menus/waiting_for_players_menu.tscn
 res://source/actors/ui/menus/start_host_menu.tscn
 res://source/actors/ui/misc/player_profile.tscn
+res://source/actors/ui/menus/waiting_for_players_menu.tscn
+res://source/actors/general/player.tscn
+res://source/actors/general/player.gd
+res://source/actors/clubs/putter.tscn
+res://source/actors/clubs/putter.gdshader
+res://source/actors/clubs/putter_material.tres
+res://source/assets/scripts/multiplayer_manager.gd
+res://source/actors/general/main.gd
+res://source/assets/materials/putter/putter_material.tres
+res://source/assets/materials/putter/putter.gdshader

@@ -6,7 +6,7 @@ extends Menu
 
 func _ready():
 	for player in Global.players:
-		add_player(player)
+		add_player(player.id)
 	Global.player_added.connect(add_player)
 	
 	if MultiplayerManager.is_authority():
@@ -17,10 +17,16 @@ func _ready():
 		start_button.disabled = true
 
 
-func add_player(player: Global.Player):
-	var profile: Control = Global.ui.player_profile_res.instantiate()
-	players_container.add_child(profile)
-	profile.text = player.username
+func add_player(player_id: int):
+	var player: Player = Global.get_player_from_id(player_id)
+	if player:
+		if players_container.get_child_count() > 0:
+			for label in players_container.get_children():
+				if label.text == player.username:
+					return
+		var profile: Control = Global.ui.player_profile_res.instantiate()
+		players_container.add_child(profile)
+		profile.text = player.username
 
 
 func _on_start_button_pressed():

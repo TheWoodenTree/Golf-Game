@@ -55,6 +55,12 @@ func pop_menu():
 	num_menus -= 1
 
 
+func pop_all():
+	for menu in open_menus:
+		call_deferred("remove_child", menu)
+	num_menus = 0
+
+
 func front():
 	return open_menus.front() if not open_menus.is_empty() else null
 

@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b35j2j2e3dxuf"]
+
+[ext_resource type="Shader" path="res://source/assets/materials/putter/putter.gdshader" id="1_2ghc7"]
+
+[sub_resource type="Gradient" id="Gradient_hcapt"]
+offsets = PackedFloat32Array(0, 0.482456, 0.561404, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ssroi"]
+gradient = SubResource("Gradient_hcapt")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2ghc7")
+shader_parameter/alpha_hash_scale = 1.0
+shader_parameter/primary_color = Color(1, 0, 0, 1)
+shader_parameter/secondary_color = Color(0.176419, 0.176419, 0.176419, 1)
+shader_parameter/camNear = 0.1
+shader_parameter/camFar = 0.5
+shader_parameter/texture_albedo = SubResource("GradientTexture1D_ssroi")

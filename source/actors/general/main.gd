@@ -29,5 +29,5 @@ func load_level(_level_id: int):
 	Global.ui.swing_power_bar.visible = true
 	add_child(level_1)
 	Global.ui.remove_menu()
-	if not local_play or (local_play and MultiplayerManager.is_authority()):
-		Global.lock_mouse()
+	#if not local_play or (local_play and MultiplayerManager.is_authority()):
+	#	Global.lock_mouse()

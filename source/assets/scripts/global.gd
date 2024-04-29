@@ -7,6 +7,7 @@ var players: Array[Player]
 @onready var main: Node = get_tree().root.get_node("Main")
 @onready var ui: Control = main.get_node("UI")
 @onready var ball_res: Resource = preload("res://source/actors/balls/ball.tscn")
+@onready var player_res: Resource = preload("res://source/actors/general/player.tscn")
 
 signal player_added
 
@@ -21,23 +22,25 @@ func unlock_mouse():
 	mouse_locked = false
 
 
+func create_new_player(id: int, username: String) -> Player:
+	var new_player: Player = player_res.instantiate()
+	new_player.id = id
+	new_player.username = username
+	return new_player
+
+
 func add_player(player: Player):
 	players.append(player)
-	rpc_emit_player_added_signal.rpc(player)
+	emit_player_added_signal.rpc(player.id)
+
+
+func get_player_from_id(id: int) -> Player:
+	for player in players:
+		if player.id == id:
+			return player
+	return null
 
 
 @rpc("any_peer", "call_local")
-func rpc_emit_player_added_signal(player: Player):
-	emit_signal("player_added", player)
-
-
-class Player:
-	var id: int
-	var username: String
-	var ball: Ball
-	
-	
-	func _init(id_: int, username_: String, ball_: Ball):
-		id = id_
-		username = username_
-		ball = ball_
+func emit_player_added_signal(player_id: int):
+	emit_signal("player_added", player_id)

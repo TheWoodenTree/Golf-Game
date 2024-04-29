@@ -10,8 +10,6 @@ background_color = Color(0.591586, 0.71637, 0.795124, 1)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_vj3f4")
-local_play = true
-enter_ip_and_port = false
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
